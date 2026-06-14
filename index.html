@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>SUBSTRATE — A Zoom Across Scale</title>
+  <meta name="description"
+    content="SUBSTRATE is a scroll-driven 3D journey across the scales of technology — from a single transistor to a global network — built with Three.js." />
+  <meta name="theme-color" content="#060810" />
+
+  <!-- Open Graph / social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="SUBSTRATE — A Zoom Across Scale" />
+  <meta property="og:description"
+    content="Transistor → chip → device → network → data. A Three.js experience that zooms across nine orders of magnitude as you scroll." />
+  <meta property="og:image" content="/og/cover.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='10' fill='%23060810'/%3E%3Crect x='14' y='14' width='20' height='20' rx='2' fill='none' stroke='%2336e0c4' stroke-width='2.4'/%3E%3Cpath d='M24 6v8M24 34v8M6 24h8M34 24h8' stroke='%2336e0c4' stroke-width='2.4' stroke-linecap='round'/%3E%3Crect x='21' y='21' width='6' height='6' rx='1' fill='%23ff9e3d'/%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body data-route="home">
+  <!-- Fixed 3D stage -->
+  <div id="app" aria-hidden="true"></div>
+  <div id="scanlines" aria-hidden="true"></div>
+
+  <!-- ===================== TOP HUD ===================== -->
+  <header class="hud hud-top">
+    <a class="brand" href="/" data-route-link aria-label="Substrate — home">
+      <svg viewBox="0 0 48 48" width="30" height="30" aria-hidden="true">
+        <rect x="13" y="13" width="22" height="22" rx="2" fill="none" stroke="currentColor" stroke-width="2.2" />
+        <path d="M24 5v8M24 35v8M5 24h8M35 24h8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+        <rect x="21" y="21" width="6" height="6" rx="1" fill="currentColor" />
+      </svg>
+      <span class="brand-word">SUBSTRATE</span>
+    </a>
+
+    <nav class="nav" aria-label="Scales">
+      <a class="nav-item is-active" id="nav-home" href="/" data-route-link>00 · Origin</a>
+      <a class="nav-item" id="nav-chip" href="/chip" data-route-link>01 · Chip</a>
+      <a class="nav-item" id="nav-device" href="/device" data-route-link>02 · Device</a>
+      <a class="nav-item" id="nav-network" href="/network" data-route-link>03 · Network</a>
+      <a class="nav-item" id="nav-data" href="/data" data-route-link>04 · Data</a>
+    </nav>
+
+    <a class="ghost-btn" href="/about" data-route-link>About</a>
+  </header>
+
+  <!-- progress rail -->
+  <div class="rail" aria-hidden="true">
+    <span class="rail-fill" id="rail-fill"></span>
+  </div>
+
+  <!-- bottom telemetry -->
+  <footer class="hud hud-bottom">
+    <span class="tele" id="tele-chapter">00 / ORIGIN</span>
+    <span class="tele tele-mid" id="tele-readout">LATENCY 0.00 ns · 0 NODES</span>
+    <button class="motion-toggle" id="motion-toggle" type="button" aria-pressed="false">
+      MOTION <span id="motion-state">[FULL]</span>
+    </button>
+  </footer>
+
+  <!-- ===================== SCROLL NARRATIVE ===================== -->
+  <main id="scroll">
+    <!-- 00 — Origin / hero -->
+    <section class="chapter" id="ch-home" data-slug="/" data-chapter="0">
+      <div class="copy copy-center hero">
+        <p class="eyebrow reveal">SILICON · SCROLL TO DESCEND THE SCALES</p>
+        <h1 class="hero-title reveal">SUB<span class="hero-thin">STRATE</span></h1>
+        <p class="hero-sub reveal">One switch flips. Scroll, and that single transistor becomes a chip, a
+          device, a network, a planet of data.</p>
+        <span class="scroll-cue reveal" aria-hidden="true">↓</span>
+      </div>
+    </section>
+
+    <!-- 01 — Chip -->
+    <section class="chapter" id="ch-chip" data-slug="/chip" data-chapter="1">
+      <div class="copy copy-left">
+        <p class="kicker">01 — THE CHIP</p>
+        <h2 class="lede">Billions of switches, one wafer.</h2>
+        <p class="body">The camera pulls back from a single gate to the die: copper traces route between
+          logic blocks, signals racing along the interconnect at a few hundred picoseconds a hop. What
+          looked like a lone switch is a city of them, etched at the nanometre.</p>
+      </div>
+    </section>
+
+    <!-- 02 — Device -->
+    <section class="chapter" id="ch-device" data-slug="/device" data-chapter="2">
+      <div class="copy copy-right">
+        <p class="kicker">02 — THE DEVICE</p>
+        <h2 class="lede">The die, taken apart.</h2>
+        <p class="body">The package lifts free and the board explodes into layers — silicon, substrate,
+          memory, the power stage and the radio. Each part floats out, labelled, then settles back into
+          the stack that fits in your hand.</p>
+      </div>
+    </section>
+
+    <!-- 03 — Network (signature instanced node field) -->
+    <section class="chapter" id="ch-network" data-slug="/network" data-chapter="3">
+      <div class="copy copy-left">
+        <p class="kicker">03 — THE NETWORK</p>
+        <h2 class="lede">Every device is a node.</h2>
+        <p class="body">Pull back far enough and the device is one point of light among millions. Links
+          ignite between nodes as packets find their route — an instanced mesh of the whole graph,
+          assembling itself as you scroll outward.</p>
+      </div>
+    </section>
+
+    <!-- 04 — Data -->
+    <section class="chapter" id="ch-data" data-slug="/data" data-chapter="4">
+      <div class="copy copy-center specs">
+        <p class="kicker">04 — THE DATA</p>
+        <h2 class="lede">It all resolves to numbers.</h2>
+        <ul class="spec-grid" id="spec-grid"></ul>
+      </div>
+    </section>
+
+    <!-- 05 — Outro -->
+    <section class="chapter" id="ch-outro" data-slug="/outro" data-chapter="5">
+      <div class="copy copy-center">
+        <h2 class="outro-title reveal">From one switch<br />to the whole grid.</h2>
+        <a class="cta" href="/about" data-route-link>The build &amp; credits ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== SIGNATURE: SCALE GAUGE ===================== -->
+  <aside class="gauge" id="gauge" aria-hidden="true">
+    <div class="gauge-head">
+      <span class="gauge-label">SCALE</span>
+      <span class="gauge-mag" id="gauge-mag">×1</span>
+    </div>
+    <ol class="gauge-ticks" id="gauge-ticks"></ol>
+    <div class="gauge-readout">
+      <span class="gauge-unit" id="gauge-unit">10 nm</span>
+      <span class="gauge-domain" id="gauge-domain">TRANSISTOR</span>
+    </div>
+  </aside>
+
+  <!-- ===================== ABOUT (overlay page) ===================== -->
+  <section id="about" class="page" aria-hidden="true">
+    <div class="page-inner">
+      <p class="kicker reveal">ABOUT THIS BUILD</p>
+      <h1 class="page-title reveal">A telescope for<br />technology, in the browser.</h1>
+      <div class="page-cols reveal">
+        <p class="body">SUBSTRATE is a scroll-driven Three.js experience: a single continuous timeline
+          where scroll position is a zoom level. The camera dollies across roughly nine orders of
+          magnitude — from a transistor gate to a planet-scale network — and the scene assembles itself
+          at every scale. No downloaded models: the chip, the exploded device and the node graph are all
+          procedural geometry and shaders.</p>
+        <ul class="page-facts">
+          <li><strong>three.js + GSAP + Lenis</strong><span>RENDER · MOTION · SCROLL</span></li>
+          <li><strong>InstancedMesh node graph</strong><span>ONE DRAW CALL, THOUSANDS OF NODES</span></li>
+          <li><strong>Adaptive DPR ladder</strong><span>SMOOTH ON MOBILE</span></li>
+        </ul>
+      </div>
+      <a class="cta reveal" href="/" data-route-link>← Back to the substrate</a>
+    </div>
+  </section>
+
+  <!-- ===================== LOADER ===================== -->
+  <div id="loader">
+    <p class="loader-word">SUBSTRATE</p>
+    <div class="loader-bar"><span class="loader-fill" id="loader-fill"></span></div>
+    <p class="loader-pct"><span id="loader-num">0</span><span class="loader-unit">%</span></p>
+  </div>
+
+  <noscript>
+    <p style="color:#fff;padding:2rem;font-family:monospace">SUBSTRATE is an interactive 3D experience
+      and needs JavaScript enabled.</p>
+  </noscript>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>
