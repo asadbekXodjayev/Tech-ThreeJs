@@ -8,7 +8,7 @@ Measured on the production build (`npm run build`) + headless smoke run on 2026-
 | `isAdaptive` | ✅ | Fluid CSS 320px→4K, no horizontal scroll (`overflow-x: hidden`), mobile nav hidden + Scale Gauge reflows to a bottom panel at 860px. DPR clamp + `PerfManager` tier ladder + node-count heuristic. Touch via Lenis, keyboard (Esc closes About, focus-visible rings), `prefers-reduced-motion` calm path with a manual MOTION toggle. |
 | `isAwardwinning` | ✅ | "Lab Instrument" system: Space Grotesk / IBM Plex Sans / IBM Plex Mono trio, 6-token palette (teal volt + amber data-heat), scanline + vignette atmosphere, orchestrated scroll, **signature: the Scale Gauge** (ticks the nm→planet ladder with a live ×magnification readout and a migrating accent colour) paired with the zoom-across-scale camera dolly. Distinct from the car app in palette, type, and concept. |
 | `isVisualized` | ✅ | The scene *is* the page — scroll drives a continuous camera dolly across scale plus a power-on circuit shader, an exploded device teardown, and an instanced node graph that ignites link by link. Not a spinning logo. |
-| `isImagesUsed` | ⚠ Partial | Deliberately fully-procedural per the spec's "build with primitives + shaders rather than fake with a stock screenshot." Uses a custom circuit-trace GLSL shader, a CSS scanline texture, an SVG OG cover, and a generated `RoomEnvironment` reflection map; no raster photography is bundled. **v-next:** add real macro die / board photography in image-reveal transitions + a diagram-plate gallery to fully satisfy this gate. |
+| `isImagesUsed` | ✅ | Real bundled raster imagery used two meaningful ways: **(1)** a scroll-revealed **diagram-plate gallery** in the Data chapter — six responsive `<img loading="lazy">` plates of the author's own tech/AI interfaces (data-algorithms, price-predictor, digit-recognizer, face-scan, app-graph, stream-stats) with mono captions; **(2)** one of those captures (`digit-recognizer.jpg`) is loaded via `THREE.TextureLoader` and mapped as the **device "screen" plate** in the exploded 3D stack. Owned/self-captured imagery (see CREDITS.md) — no stock. Images are `loading="lazy"`/`decoding="async"` so they stay out of the initial payload; procedural shaders + `RoomEnvironment` still carry the rest of the scene. |
 
 ## QA gate (headless harness)
 
@@ -16,6 +16,13 @@ Measured on the production build (`npm run build`) + headless smoke run on 2026-
   0 console / page / request errors, exit 0.** Six screenshots in `qa/shots/`
   (`scale-0` … `scale-5`). Headless FPS ≈28 on SwiftShader software rasterizer —
   reported for liveness only, not a perf measurement.
+- `node qa/matrix.mjs` — **full cross-device matrix** on strict port **4184**. Loads `/`
+  at widths **320 / 768 / 1440 / 3840** and deep-links every slug (`/`, `/chip`,
+  `/device`, `/network`, `/data`, `/about`). Asserts **0 console/pageerror/requestfailed**
+  and **no horizontal overflow** (`scrollWidth <= innerWidth + 2`) everywhere, screenshots
+  each, and writes `qa/QA-REPORT.md`. **Latest run: ✅ PASS — 0 errors, 0 overflow.**
+  (A 320px hero-copy overflow surfaced by the matrix was fixed via `max-width: min(…,100%)`
+  + `overflow-wrap` on the display headings.)
 
 ## Notable deviations (justified)
 

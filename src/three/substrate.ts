@@ -41,6 +41,7 @@ export class Substrate {
   private gateMat!: THREE.MeshStandardMaterial;
   private dataField!: THREE.Points;
   private dataMat!: THREE.PointsMaterial;
+  private screenMat?: THREE.MeshBasicMaterial;
 
   private nodeCount = 0;
   private nodePhase!: Float32Array;
@@ -261,7 +262,32 @@ export class Substrate {
     pins.instanceMatrix.needsUpdate = true;
     this.device.add(pins);
 
+    // textured "screen" plate — a real captured interface mapped as a 3D texture,
+    // floating above the silicon-die layer in the exploded stack.
+    this.screenMat = new THREE.MeshBasicMaterial({
+      color: 0x223036, transparent: true, opacity: 0, toneMapped: false,
+    });
+    this.track(this.screenMat);
+    const screenGeo = new THREE.PlaneGeometry(2.6, 1.7);
+    screenGeo.rotateX(-Math.PI / 2);
+    this.track(screenGeo);
+    const screen = new THREE.Mesh(screenGeo, this.screenMat);
+    const sBase = new THREE.Vector3(0, 0.34 * 2 - 0.4 + 0.18, 0);
+    const sExplode = new THREE.Vector3(0, 1.2 * 1.5 - 0.8 + 1.0, 0);
+    screen.position.copy(sBase);
+    this.device.add(screen);
+    this.deviceParts.push({ obj: screen, base: sBase, explode: sExplode });
+
     this.device.visible = false;
+  }
+
+  /** Attach a loaded raster texture as the device "screen" (3D texture use). */
+  setScreenTexture(tex: THREE.Texture): void {
+    if (!this.screenMat) return;
+    tex.colorSpace = THREE.SRGBColorSpace;
+    this.screenMat.map = tex;
+    this.screenMat.color.set(0xffffff);
+    this.screenMat.needsUpdate = true;
   }
 
   /* ============================================================

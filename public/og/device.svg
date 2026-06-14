@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" font-family="'Space Grotesk','Segoe UI',sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#070a14"/><stop offset="1" stop-color="#04060d"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.18" cy="0.32" r="0.9">
+      <stop offset="0" stop-color="#5fcad6" stop-opacity="0.18"/>
+      <stop offset="0.5" stop-color="#5fcad6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <g opacity="0.8"><path d="M860 70 h120 v0 h60" fill="none" stroke="#5fcad6" stroke-width="2" opacity="0.3"/><circle cx="980" cy="70" r="4" fill="#5fcad6" opacity="0.6"/><path d="M860 132 h157 v40 h60" fill="none" stroke="#5fcad6" stroke-width="2" opacity="0.4"/><circle cx="1033" cy="132" r="4" fill="#5fcad6" opacity="0.6"/><path d="M860 194 h194 v80 h60" fill="none" stroke="#5fcad6" stroke-width="2" opacity="0.5"/><circle cx="1086" cy="194" r="4" fill="#5fcad6" opacity="0.6"/><path d="M860 256 h231 v0 h60" fill="none" stroke="#5fcad6" stroke-width="2" opacity="0.6"/><circle cx="1139" cy="256" r="4" fill="#5fcad6" opacity="0.6"/><path d="M860 318 h268 v40 h60" fill="none" stroke="#5fcad6" stroke-width="2" opacity="0.3"/><circle cx="1012" cy="318" r="4" fill="#5fcad6" opacity="0.6"/><path d="M860 380 h125 v80 h60" fill="none" stroke="#5fcad6" stroke-width="2" opacity="0.4"/><circle cx="1065" cy="380" r="4" fill="#5fcad6" opacity="0.6"/><path d="M860 442 h162 v0 h60" fill="none" stroke="#5fcad6" stroke-width="2" opacity="0.5"/><circle cx="1118" cy="442" r="4" fill="#5fcad6" opacity="0.6"/><path d="M860 504 h199 v40 h60" fill="none" stroke="#5fcad6" stroke-width="2" opacity="0.6"/><circle cx="991" cy="504" r="4" fill="#5fcad6" opacity="0.6"/><path d="M860 566 h236 v80 h60" fill="none" stroke="#5fcad6" stroke-width="2" opacity="0.3"/><circle cx="1044" cy="566" r="4" fill="#5fcad6" opacity="0.6"/></g>
+  <rect x="90" y="74" width="34" height="34" rx="3" fill="none" stroke="#5fcad6" stroke-width="3"/>
+  <rect x="100" y="84" width="14" height="14" rx="2" fill="#5fcad6"/>
+  <text x="146" y="99" fill="#e6ebf2" font-size="22" font-weight="700" letter-spacing="6">SUBSTRATE</text>
+  <text x="90" y="200" fill="#5fcad6" font-family="'IBM Plex Mono',monospace" font-size="22" letter-spacing="7">02 · THE DEVICE</text>
+  <text y="300" fill="#e6ebf2" font-size="76" font-weight="700" letter-spacing="-2"><tspan x="90" dy="0">The die,</tspan><tspan x="90" dy="92">taken apart.</tspan></text>
+  <text x="90" y="502" fill="#5b6678" font-family="'IBM Plex Sans',sans-serif" font-size="26">Silicon, substrate, memory, power and radio — exploded, then stacked.</text>
+  <g font-family="'IBM Plex Mono',monospace">
+    <rect x="90" y="540" width="320" height="58" rx="6" fill="none" stroke="#5fcad6" stroke-opacity="0.4"/>
+    <text x="110" y="566" fill="#5b6678" font-size="14" letter-spacing="3">SCALE</text>
+    <text x="110" y="588" fill="#e6ebf2" font-size="22" font-weight="600">12 cm</text>
+    <text x="250" y="566" fill="#5b6678" font-size="14" letter-spacing="3">DOMAIN</text>
+    <text x="250" y="588" fill="#5fcad6" font-size="16" letter-spacing="2">DEVICE</text>
+  </g>
+</svg>

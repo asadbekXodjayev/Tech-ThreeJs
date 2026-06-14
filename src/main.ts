@@ -73,6 +73,12 @@ async function boot(): Promise<void> {
   const substrate = new Substrate(lowEnd ? 'low' : 'high');
   scene.add(substrate.group);
 
+  // load a real captured interface as a 3D texture for the device screen plate
+  new THREE.TextureLoader().load('/img/digit-recognizer.jpg', (tex) => {
+    tex.anisotropy = Math.min(4, renderer.capabilities.getMaxAnisotropy());
+    substrate.setScreenTexture(tex);
+  });
+
   /* post-processing (bloom for the signal/node glow) */
   const composer = new EffectComposer(renderer);
   composer.addPass(new RenderPass(scene, camera));

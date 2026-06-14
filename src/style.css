@@ -251,7 +251,7 @@ body::after {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: 31rem;
+  max-width: min(31rem, 100%);
   pointer-events: none;
 }
 
@@ -263,7 +263,16 @@ body::after {
   margin-inline: auto;
   align-items: center;
   text-align: center;
-  max-width: 48rem;
+  max-width: min(48rem, 100%);
+}
+
+/* keep long unbroken display strings from forcing horizontal overflow */
+.hero-title,
+.eyebrow,
+.lede,
+.outro-title {
+  max-width: 100%;
+  overflow-wrap: break-word;
 }
 
 .copy-left {
@@ -379,6 +388,87 @@ body::after {
   font-size: 0.63rem;
   letter-spacing: 0.16em;
   color: var(--slate);
+}
+
+/* ------- macro / diagram plate gallery (real raster imagery) ------- */
+.plates {
+  width: 100%;
+  margin-top: 2.6rem;
+  text-align: left;
+}
+
+.plates-cap {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  color: var(--slate);
+  margin-bottom: 1rem;
+}
+
+.plate-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+  gap: 0.9rem;
+}
+
+.plate {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border: 1px solid rgba(230, 235, 242, 0.1);
+  border-radius: 6px;
+  background: rgba(6, 8, 16, 0.6);
+  aspect-ratio: 16 / 10;
+  transition: border-color 0.4s var(--ease), transform 0.4s var(--ease);
+}
+
+.plate:hover,
+.plate:focus-visible {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+}
+
+.plate img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: saturate(0.85) contrast(1.04);
+  transition: filter 0.4s var(--ease), transform 0.6s var(--ease);
+}
+
+.plate:hover img {
+  filter: saturate(1.05) contrast(1.05);
+  transform: scale(1.04);
+}
+
+.plate-meta {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 1.4rem 0.8rem 0.6rem;
+  background: linear-gradient(0deg, rgba(6, 8, 16, 0.92), transparent);
+  font-family: var(--font-mono);
+  pointer-events: none;
+}
+
+.plate-meta b {
+  font-size: 0.64rem;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  font-weight: 500;
+  transition: color 0.4s var(--ease);
+}
+
+.plate-meta i {
+  font-size: 0.58rem;
+  letter-spacing: 0.06em;
+  color: var(--slate);
+  font-style: normal;
 }
 
 .outro-title {
